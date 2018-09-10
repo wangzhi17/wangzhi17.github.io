@@ -1,8 +1,0 @@
-
-App Thinning Size Report for All Variants of hotelCtrl
-
-Variant: hotelCtrl-iPad Air.ipa
-Supported devices: iPad Air
-App + On Demand Resources size: 24 MB compressed, 27.7 MB uncompressed
-App size: 24 MB compressed, 27.7 MB uncompressed
-On Demand Resources size: Zero KB compressed, Zero KB uncompressed
