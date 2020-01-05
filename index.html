@@ -61,21 +61,6 @@ class WebsocketClient extends React.Component {
     }
 
     componentDidMount() {
-
-        webSocket=new WebSocket("ws://echo.websocket.org/");
-        webSocket.onopen=function () {
-            console.log('连接成功')
-        };
-        webSocket.onmessage=function (ev) {
-            console.log(ev.data)
-        };
-        webSocket.onclose=function () {
-            console.log('连接关闭')
-        };
-
-        window.onbeforeunload=function () {
-            webSocket.close();
-        }
         //this.timerID = setInterval(() => this.tick(),1);
     }
 
