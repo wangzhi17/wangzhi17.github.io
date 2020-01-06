@@ -1,49 +1,145 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Install HotelCtrl</title>
-    <style type="text/css">
-        body {
-            font-family: Helvetica, arial, sans-serif;
-        }
-        .congrats {
-            font-size: 16pt;
-            padding: 6px;
-            text-align: center;
-        }
-        .step {
-            background: white;
-            border: 1px #ccc solid;
-            border-radius: 14px;
-            padding: 4px 10px;
-            margin: 10px 0;
-        }
-        .instructions {
-            font-size: 10pt;
-        }
-        .arrow {
-            font-size: 15pt;
-        }
-        table {
-            width: 100%;
-        }
-    </style>
+    <meta charset="UTF-8"/>
+    <title>海底捞地排风远程管理控制React版本测试</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
 <body>
 
-<div class="step">
-    <table><tr>
-        <td class="instructions">Install the<br />HotelCtrl App</td>
-        <td width="24" class="arrow">→</td>
-        <td width="72" class="imagelink">
-            <a href="itms-services://?action=download-manifest&url=https://wangzhi17.github.io/app/manifest.plist">
-                <img src="./image/hotelCtrl57.png" height="58" width="58" />
-            </a>
-        </td>
-    </tr></table>
-</div>
+<div id="hdl"></div>
+<script type="text/babel">
+    let webSocket = null;
+
+    class WebsocketClient extends React.Component {
+        constructor(props) {
+            super(props);
+            let dJSON = JSON.stringify({
+                "code": "0000",
+                "data": {
+                    "storeInfo": {"storeID": "86-10-35"},
+                    "group": [{
+                        "groupName": "#1地排风",
+                        "tableInfo": [{
+                            "tableName": "001",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "airValve": "75%",
+                            "controllerMode": "自动模式"
+                        }, {
+                            "tableName": "002",
+                            "fireStatus": "0",
+                            "setOpenPercent": "0",
+                            "currentOpenPercent": "0",
+                            "controllerMode": "自动模式"
+                        }],
+                        "inverter": {"inverterName": "#1变频器", "setFrequency": "40Hz", "currentFrequency": "40Hz"}
+                    }, {
+                        "groupName": "#2地排风",
+                        "tableInfo": [{
+                            "tableName": "003",
+                            "fireStatus": "0",
+                            "setOpenPercent": "0",
+                            "currentOpenPercent": "0",
+                            "controllerMode": "自动模式"
+                        }, {
+                            "tableName": "004",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "自动模式"
+                        }],
+                        "inverter": {"inverterName": "#2变频器", "setFrequency": "30Hz", "currentFrequency": "30Hz"}
+                    }]
+                }
+            });
+            this.state = {
+                socketMessage: JSON.parse(dJSON)
+            };
+        }
+
+        componentDidMount() {
+
+            // webSocket=new WebSocket("ws://echo.websocket.org/");
+            // webSocket.onopen=function () {
+            //     console.log('连接成功')
+            // };
+            // webSocket.onmessage=function (ev) {
+            //     console.log(ev.data)
+            // };
+            // webSocket.onclose=function () {
+            //     console.log('连接关闭')
+            // };
+            //
+            // window.onbeforeunload=function () {
+            //     webSocket.close();
+            // }
+            //this.timerID = setInterval(() => this.tick(),1);
+        }
+
+        componentWillUnmount() {
+            //clearInterval(this.timerID);
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>代码：{this.state.socketMessage.code}</h1>
+                    <h1>门店代码：{this.state.socketMessage.data.storeInfo.storeID}</h1>
+                    {
+                        this.state.socketMessage.data.group.map((group, index) => {
+                            let groupName = group.groupName;
+                            let tableInfo = group.tableInfo;
+                            let inverter = group.inverter;
+                            let inverterName = inverter.inverterName;
+                            let setFrequency = inverter.setFrequency;
+                            let currentFrequency = inverter.currentFrequency;
+                            console.log(`group:${index}`);
+                            return (
+                                <div key={index}>
+                                    <h2>-------------------------------------------------------------------------------</h2>
+                                    <h2>组名：{groupName}</h2>
+                                    {
+                                        tableInfo.map((tableInfos, i) => {
+                                            console.log(`tableInfos:${i}`);
+                                            let tableName = tableInfos.tableName;
+                                            let fireStatus = tableInfos.fireStatus;
+                                            let setOpenPercent = tableInfos.setOpenPercent;
+                                            let currentOpenPercent = tableInfos.currentOpenPercent;
+                                            let controllerMode = tableInfos.controllerMode;
+                                            return (
+                                                <div key={i}>
+                                                    <h2>-------------------------------</h2>
+                                                    <h2>餐桌号：{tableName}</h2>
+                                                    <h2>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</h2>
+                                                    <h2>设置角度：{setOpenPercent}</h2>
+                                                    <h2>当前角度：{currentOpenPercent}</h2>
+                                                    <h2>控制器模式：{controllerMode}</h2>
+
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                    <h2>-------------------------------</h2>
+                                    <h2>变频器：名称：{inverterName}，设置频率：{setFrequency}，当前频率：{currentFrequency}</h2>
+                                </div>
+                            )
+                        })
+                    }
+
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <WebsocketClient/>,
+        document.getElementById('hdl')
+    );
+</script>
 
 </body>
 </html>
