@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8"/>
     <title>海底捞地排风远程管理控制React版本测试</title>
-    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
-    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
-    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="./js/react_16.4.0_dev.js"></script>
+    <script src="./js/react-dom_16.4.0_dev.js"></script>
+    <script src="./js/babel_6.26.0.js"></script>
 </head>
 <body>
 
 <div id="hdl"></div>
-<script type="text/babel">
+<script type="text/jsx">
     let webSocket = null;
 
     class WebsocketClient extends React.Component {
@@ -57,7 +57,8 @@
                 }
             });
             this.state = {
-                socketMessage: JSON.parse(dJSON)
+                socketMessage: JSON.parse(dJSON),
+                selectedGroupName: ""
             };
         }
 
@@ -84,52 +85,73 @@
             //clearInterval(this.timerID);
         }
 
+        selectGroupName = (groupName) => {
+            this.setState({
+                selectedGroupName: groupName
+            })
+        };
+
         render() {
             return (
                 <div>
                     <h1>代码：{this.state.socketMessage.code}</h1>
                     <h1>门店代码：{this.state.socketMessage.data.storeInfo.storeID}</h1>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        {
+                            this.state.socketMessage.data.group.map((groups, index) => {
+                                let groupName = groups.groupName;
+                                return (
+                                    <div key={index}>
+                                        <button style={this.state.selectedGroupName === groupName ? {
+                                            fontSize: 20,
+                                            color: 'red',
+                                            marginRight: 10,
+                                            backgroundColor: '#FFFFFF'
+                                        } : {fontSize: 20, color: 'black', marginRight: 10}}
+                                                onClick={() => this.selectGroupName(groupName)}>
+                                            {groupName}
+                                        </button>
+
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                     {
-                        this.state.socketMessage.data.group.map((group, index) => {
-                            let groupName = group.groupName;
-                            let tableInfo = group.tableInfo;
-                            let inverter = group.inverter;
-                            let inverterName = inverter.inverterName;
-                            let setFrequency = inverter.setFrequency;
-                            let currentFrequency = inverter.currentFrequency;
-                            console.log(`group:${index}`);
-                            return (
-                                <div key={index}>
-                                    <h2>-------------------------------------------------------------------------------</h2>
-                                    <h2>组名：{groupName}</h2>
-                                    {
-                                        tableInfo.map((tableInfos, i) => {
-                                            console.log(`tableInfos:${i}`);
-                                            let tableName = tableInfos.tableName;
-                                            let fireStatus = tableInfos.fireStatus;
-                                            let setOpenPercent = tableInfos.setOpenPercent;
-                                            let currentOpenPercent = tableInfos.currentOpenPercent;
-                                            let controllerMode = tableInfos.controllerMode;
-                                            return (
-                                                <div key={i}>
-                                                    <h2>-------------------------------</h2>
-                                                    <h2>餐桌号：{tableName}</h2>
-                                                    <h2>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</h2>
-                                                    <h2>设置角度：{setOpenPercent}</h2>
-                                                    <h2>当前角度：{currentOpenPercent}</h2>
-                                                    <h2>控制器模式：{controllerMode}</h2>
+                        this.state.socketMessage.data.group.map((groups, index) => {
+                            if (groups.groupName === this.state.selectedGroupName) {
+                                let tableInfo = groups.tableInfo;
+                                let inverter = groups.inverter;
+                                let inverterName = inverter.inverterName;
+                                let setFrequency = inverter.setFrequency;
+                                let currentFrequency = inverter.currentFrequency;
+                                console.log(`group:${index}`);
+                                return (
+                                    <div key={index} style={{display: 'flex', flexDirection: 'row'}}>
+                                        {
+                                            tableInfo.map((tableInfos, i) => {
 
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                    <h2>-------------------------------</h2>
-                                    <h2>变频器：名称：{inverterName}，设置频率：{setFrequency}，当前频率：{currentFrequency}</h2>
-                                </div>
-                            )
-                        })
-                    }
-
+                                                let tableName = tableInfos.tableName;
+                                                let fireStatus = tableInfos.fireStatus;
+                                                let setOpenPercent = tableInfos.setOpenPercent;
+                                                let currentOpenPercent = tableInfos.currentOpenPercent;
+                                                let controllerMode = tableInfos.controllerMode;
+                                                return (
+                                                    <div key={i} style={{marginRight: 20}}>
+                                                        <h2>餐桌号：{tableName}</h2>
+                                                        <h2>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</h2>
+                                                        <h2>设置角度：{setOpenPercent}</h2>
+                                                        <h2>当前角度：{currentOpenPercent}</h2>
+                                                        <h2>模式：{controllerMode}</h2>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <h2>变频器：名称：{inverterName}，设置频率：{setFrequency}，当前频率：{currentFrequency}</h2>
+                                    </div>
+                                )
+                            }
+                        })}
                 </div>
             );
         }
