@@ -28,15 +28,20 @@
                             "setOpenPercent": "76",
                             "currentOpenPercent": "76",
                             "airValve": "75%",
-                            "controllerMode": "自动模式"
+                            "controllerMode": "0"
                         }, {
                             "tableName": "002",
                             "fireStatus": "0",
                             "setOpenPercent": "0",
                             "currentOpenPercent": "0",
-                            "controllerMode": "自动模式"
+                            "controllerMode": "0"
                         }],
-                        "inverter": {"inverterName": "#1变频器", "setFrequency": "40Hz", "currentFrequency": "40Hz"}
+                        "inverter": {
+                            "inverterName": "#1变频器",
+                            "setFrequency": "40Hz",
+                            "currentFrequency": "40Hz",
+                            "inverterMode": "0"
+                        }
                     }, {
                         "groupName": "#2地排风",
                         "tableInfo": [{
@@ -44,15 +49,92 @@
                             "fireStatus": "0",
                             "setOpenPercent": "0",
                             "currentOpenPercent": "0",
-                            "controllerMode": "自动模式"
+                            "controllerMode": "0"
                         }, {
-                            "tableName": "004",
+                            "tableName": "005",
                             "fireStatus": "1",
                             "setOpenPercent": "76",
                             "currentOpenPercent": "76",
-                            "controllerMode": "自动模式"
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "006",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "008",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "009",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "010",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "011",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "012",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "013",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "015",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "016",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "018",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "019",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
+                        }, {
+                            "tableName": "020",
+                            "fireStatus": "1",
+                            "setOpenPercent": "76",
+                            "currentOpenPercent": "76",
+                            "controllerMode": "0"
                         }],
-                        "inverter": {"inverterName": "#2变频器", "setFrequency": "30Hz", "currentFrequency": "30Hz"}
+                        "inverter": {
+                            "inverterName": "#2变频器",
+                            "setFrequency": "30Hz",
+                            "currentFrequency": "30Hz",
+                            "inverterMode": "0"
+                        }
                     }]
                 }
             });
@@ -63,7 +145,6 @@
         }
 
         componentDidMount() {
-
             // webSocket=new WebSocket("ws://echo.websocket.org/");
             // webSocket.onopen=function () {
             //     console.log('连接成功')
@@ -90,25 +171,36 @@
                 selectedGroupName: groupName
             })
         };
+        modeConversion = (mode) => {
+            let modeTitle = '';
+            switch (mode) {
+                case '0':
+                    modeTitle = '自动模式';
+                    break;
+                case '1':
+                    modeTitle = '离线模式';
+                    break;
+                case '2':
+                    modeTitle = '命令模式';
+                    break;
+            }
+            return modeTitle;
+        };
 
         render() {
             return (
-                <div>
+                <div style={styleSheet.content}>
                     <h1>代码：{this.state.socketMessage.code}</h1>
                     <h1>门店代码：{this.state.socketMessage.data.storeInfo.storeID}</h1>
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={styleSheet.allGroupButton}>
                         {
                             this.state.socketMessage.data.group.map((groups, index) => {
                                 let groupName = groups.groupName;
                                 return (
                                     <div key={index}>
-                                        <button style={this.state.selectedGroupName === groupName ? {
-                                            fontSize: 20,
-                                            color: 'red',
-                                            marginRight: 10,
-                                            backgroundColor: '#FFFFFF'
-                                        } : {fontSize: 20, color: 'black', marginRight: 10}}
-                                                onClick={() => this.selectGroupName(groupName)}>
+                                        <button
+                                            style={this.state.selectedGroupName === groupName ? styleSheet.groupButtonActive : styleSheet.groupButtonNormal}
+                                            onClick={() => this.selectGroupName(groupName)}>
                                             {groupName}
                                         </button>
 
@@ -125,32 +217,32 @@
                                 let inverterName = inverter.inverterName;
                                 let setFrequency = inverter.setFrequency;
                                 let currentFrequency = inverter.currentFrequency;
-                                console.log(`group:${index}`);
+                                let inverterMode = inverter.inverterMode;
                                 return (
-                                    <div key={index} style={{display: 'flex', flexDirection: 'row'}}>
+                                    <div key={index} style={styleSheet.allDevice}>
                                         {
                                             tableInfo.map((tableInfos, i) => {
-
                                                 let tableName = tableInfos.tableName;
                                                 let fireStatus = tableInfos.fireStatus;
                                                 let setOpenPercent = tableInfos.setOpenPercent;
                                                 let currentOpenPercent = tableInfos.currentOpenPercent;
                                                 let controllerMode = tableInfos.controllerMode;
                                                 return (
-                                                    <div key={i} style={{marginRight: 20}}>
+                                                    <div key={i} style={styleSheet.tableInfo}>
                                                         <h2>餐桌号：{tableName}</h2>
                                                         <h2>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</h2>
                                                         <h2>设置角度：{setOpenPercent}</h2>
                                                         <h2>当前角度：{currentOpenPercent}</h2>
-                                                        <h2>模式：{controllerMode}</h2>
+                                                        <h2>模式：{this.modeConversion(controllerMode)}</h2>
                                                     </div>
                                                 )
                                             })
                                         }
-                                        <div style={{display:'flex',flexDirection:'column'}}>
+                                        <div style={styleSheet.tableInfo}>
                                             <h2>变频器名称：{inverterName}</h2>
                                             <h2>设置频率：{setFrequency}</h2>
                                             <h2>当前频率：{currentFrequency}</h2>
+                                            <h2>模式：{this.modeConversion(inverterMode)}</h2>
                                         </div>
                                     </div>
                                 )
@@ -161,6 +253,38 @@
         }
     }
 
+    const styleSheet = ({
+        content: {
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1
+        },
+        allGroupButton: {
+            display: 'flex',
+            flexDirection: 'row'
+        },
+        allDevice: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        },
+        groupButtonActive: {
+            fontSize: 20,
+            color: 'red',
+            marginRight: 10,
+            backgroundColor: '#FFFFFF'
+        },
+        groupButtonNormal: {
+            fontSize: 20,
+            color: 'black',
+            marginRight: 10
+        },
+        tableInfo: {
+            marginRight: 20,
+            display: 'flex',
+            flexDirection: 'column'
+        }
+    });
     ReactDOM.render(
         <WebsocketClient/>,
         document.getElementById('hdl')
