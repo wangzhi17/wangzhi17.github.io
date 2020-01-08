@@ -229,20 +229,20 @@
                                                 let controllerMode = tableInfos.controllerMode;
                                                 return (
                                                     <div key={i} style={styleSheet.tableInfo}>
-                                                        <h2>餐桌号：{tableName}</h2>
-                                                        <h2>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</h2>
-                                                        <h2>设置角度：{setOpenPercent}</h2>
-                                                        <h2>当前角度：{currentOpenPercent}</h2>
-                                                        <h2>模式：{this.modeConversion(controllerMode)}</h2>
+                                                        <text style={styleSheet.tableInfoText}>餐桌号：{tableName}</text>
+                                                        <text style={styleSheet.tableInfoText}>点火状态：{fireStatus === '0' ? '关闭' : '开启'}</text>
+                                                        <text style={styleSheet.tableInfoText}>设置角度：{setOpenPercent}</text>
+                                                        <text style={styleSheet.tableInfoText}>当前角度：{currentOpenPercent}</text>
+                                                        <text style={styleSheet.tableInfoText}>模式：{this.modeConversion(controllerMode)}</text>
                                                     </div>
                                                 )
                                             })
                                         }
                                         <div style={styleSheet.tableInfo}>
-                                            <h2>变频器名称：{inverterName}</h2>
-                                            <h2>设置频率：{setFrequency}</h2>
-                                            <h2>当前频率：{currentFrequency}</h2>
-                                            <h2>模式：{this.modeConversion(inverterMode)}</h2>
+                                            <text style={styleSheet.tableInfoText}>变频器：{inverterName}</text>
+                                            <text style={styleSheet.tableInfoText}>设置频率：{setFrequency}</text>
+                                            <text style={styleSheet.tableInfoText}>当前频率：{currentFrequency}</text>
+                                            <text style={styleSheet.tableInfoText}>模式：{this.modeConversion(inverterMode)}</text>
                                         </div>
                                     </div>
                                 )
@@ -269,13 +269,12 @@
             flexWrap: 'wrap'
         },
         groupButtonActive: {
-            fontSize: 20,
+            fontSize: 28,
             color: 'red',
-            marginRight: 10,
-            backgroundColor: '#FFFFFF'
+            marginRight: 10
         },
         groupButtonNormal: {
-            fontSize: 20,
+            fontSize: 28,
             color: 'black',
             marginRight: 10
         },
@@ -283,6 +282,11 @@
             marginRight: 20,
             display: 'flex',
             flexDirection: 'column'
+        },
+        tableInfoText: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: 'black'
         }
     });
     ReactDOM.render(
