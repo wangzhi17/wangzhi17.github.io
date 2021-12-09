@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>前言</title>
+    <title>前言 · 学习资料</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="description" content="">
     <meta name="generator" content="GitBook 3.2.3">
 
+
     <link rel="stylesheet" href="gitbook/style.css">
+
+
     <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+
+
     <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+
+
     <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+
 
     <meta name="HandheldFriendly" content="true"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -20,7 +28,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
+
     <link rel="next" href="Chapter1/"/>
+
 
 </head>
 <body>
@@ -28,33 +38,65 @@
 <div class="book">
     <div class="book-summary">
 
+
         <div id="book-search-input" role="search">
             <input type="text" placeholder="Type to search"/>
         </div>
 
+
         <nav role="navigation">
+
 
             <ul class="summary">
 
+
                 <li class="chapter active" data-level="1.1" data-path="./">
+
                     <a href="./">
+
+
                         前言
+
                     </a>
+
+
                 </li>
+
                 <li class="chapter " data-level="1.2" data-path="Chapter1/">
+
                     <a href="Chapter1/">
+
+
                         第一章
+
                     </a>
+
+
                     <ul class="articles">
+
+
                         <li class="chapter " data-level="1.2.1" data-path="Chapter1/刷新DNS.html">
+
                             <a href="Chapter1/刷新DNS.html">
+
+
                                 第1节：刷新DNS
+
                             </a>
+
+
                         </li>
+
                         <li class="chapter " data-level="1.2.2" data-path="Chapter1/Charles破解.html">
+
                             <a href="Chapter1/Charles破解.html">
+
+
                                 第2节：Charles破解
+
                             </a>
+
+
                         </li>
 
                         <li class="chapter " data-level="1.2.3" data-path="Chapter1/搭建React Native开发环境.html">
@@ -167,13 +209,7 @@
 
                 <li class="divider"></li>
 
-                <li>
-                    <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-                        Published with GitBook
-                    </a>
-                </li>
             </ul>
-
 
         </nav>
 
@@ -241,7 +277,7 @@
     </div>
 
     <script>
-        var gitbook = gitbook || [];
+        const gitbook = gitbook || [];
         gitbook.push(function () {
             gitbook.page.hasChanged({
                 "page": {
@@ -294,12 +330,21 @@
                     "dir": "ltr"
                 },
                 "config": {
-                    "gitbook": "*",
-                    "theme": "default",
-                    "variables": {},
-                    "plugins": ["livereload"],
+                    "plugins": ["icp"],
+                    "styles": {
+                        "website": "styles/website.css",
+                        "pdf": "styles/pdf.css",
+                        "epub": "styles/epub.css",
+                        "mobi": "styles/mobi.css",
+                        "ebook": "styles/ebook.css",
+                        "print": "styles/print.css"
+                    },
                     "pluginsConfig": {
-                        "livereload": {},
+                        "icp": {
+                            "link": "https://beian.miit.gov.cn/",
+                            "style": {},
+                            "number": "京ICP备2021038404号"
+                        },
                         "highlight": {},
                         "search": {},
                         "lunr": {"maxIndexSize": 1000000, "ignoreSpecialCharacters": false},
@@ -324,12 +369,7 @@
                             }, "showLevel": false
                         }
                     },
-                    "structure": {
-                        "langs": "LANGS.md",
-                        "readme": "README.md",
-                        "glossary": "GLOSSARY.md",
-                        "summary": "SUMMARY.md"
-                    },
+                    "theme": "default",
                     "pdf": {
                         "pageNumbers": true,
                         "fontSize": 12,
@@ -339,17 +379,18 @@
                         "pageBreaksBefore": "/",
                         "margin": {"right": 62, "left": 62, "top": 56, "bottom": 56}
                     },
-                    "styles": {
-                        "website": "styles/website.css",
-                        "pdf": "styles/pdf.css",
-                        "epub": "styles/epub.css",
-                        "mobi": "styles/mobi.css",
-                        "ebook": "styles/ebook.css",
-                        "print": "styles/print.css"
-                    }
+                    "structure": {
+                        "langs": "LANGS.md",
+                        "readme": "README.md",
+                        "glossary": "GLOSSARY.md",
+                        "summary": "SUMMARY.md"
+                    },
+                    "variables": {},
+                    "title": "学习资料",
+                    "gitbook": "*"
                 },
                 "file": {"path": "README.md", "mtime": "2021-12-09T02:05:22.408Z", "type": "markdown"},
-                "gitbook": {"version": "3.2.3", "time": "2021-12-09T02:38:35.315Z"},
+                "gitbook": {"version": "3.2.3", "time": "2021-12-09T02:54:56.927Z"},
                 "basePath": ".",
                 "book": {"language": ""}
             });
@@ -360,9 +401,6 @@
 
 <script src="gitbook/gitbook.js"></script>
 <script src="gitbook/theme.js"></script>
-
-
-<script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
 
 
 <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>

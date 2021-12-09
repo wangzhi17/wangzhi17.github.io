@@ -1,0 +1,496 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第5节：在Spring Boot中配置ssl证书实现https · 学习资料</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../Chapter2/" />
+    
+    
+    <link rel="prev" href="解决GitHub网速慢的问题.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="刷新DNS.html">
+            
+                <a href="刷新DNS.html">
+            
+                    
+                    第1节：刷新DNS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="Charles破解.html">
+            
+                <a href="Charles破解.html">
+            
+                    
+                    第2节：Charles破解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="搭建React Native开发环境.html">
+            
+                <a href="搭建React Native开发环境.html">
+            
+                    
+                    第3节：搭建React Native开发环境（ios）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="解决GitHub网速慢的问题.html">
+            
+                <a href="解决GitHub网速慢的问题.html">
+            
+                    
+                    第4节：解决GitHub网速慢的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5" data-path="在Spring Boot中配置ssl证书实现https.html">
+            
+                <a href="在Spring Boot中配置ssl证书实现https.html">
+            
+                    
+                    第5节：在Spring Boot中配置ssl证书实现https
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Chapter2/">
+            
+                <a href="../Chapter2/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Chapter2/安装Python.html">
+            
+                <a href="../Chapter2/安装Python.html">
+            
+                    
+                    第1节：安装Python
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Chapter2/安装MySQL5.7.html">
+            
+                <a href="../Chapter2/安装MySQL5.7.html">
+            
+                    
+                    第2节：安装MySQL5.7
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Chapter3/">
+            
+                <a href="../Chapter3/">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Chapter4/">
+            
+                <a href="../Chapter4/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+
+    
+    <li>
+        
+        
+        
+            
+        
+        
+            <a href="https://beian.miit.gov.cn/" target="blank" class="gitbook-link">
+                京ICP备2021038404号
+            </a>
+        
+    </li>
+    
+</ul>
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第5节：在Spring Boot中配置ssl证书实现https</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5728;spring-boot&#x4E2D;&#x914D;&#x7F6E;ssl&#x8BC1;&#x4E66;&#x5B9E;&#x73B0;https">&#x5728;Spring Boot&#x4E2D;&#x914D;&#x7F6E;ssl&#x8BC1;&#x4E66;&#x5B9E;&#x73B0;https</h1>
+<p>&#x5728;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528; http &#x662F;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5F88;&#x591A;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x5230; https&#x3002;https &#x662F;&#x4EE5;&#x5B89;&#x5168;&#x4E3A;&#x76EE;&#x6807;&#x7684; http &#x901A;&#x9053;&#xFF0C;&#x800C; https &#x7684;&#x5B89;&#x5168;&#x57FA;&#x7840;&#x662F; SSL&#x3002;</p>
+<p>&#x6211;&#x5728;&#x4F7F;&#x7528; SSL &#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;&#x5B9E;&#x9645;&#x7684;&#x8BC1;&#x4E66;&#xFF0C;&#x8E29;&#x4E86;&#x4E00;&#x4E9B;&#x5751;&#xFF0C;&#x9274;&#x4E8E;&#x7F51;&#x4E0A;&#x7684;&#x5F88;&#x591A;&#x6559;&#x7A0B;&#x7684;ssl &#x90FD;&#x662F;&#x4F7F;&#x7528;&#x7684; java &#x81EA;&#x5E26;&#x7684; keytool &#x547D;&#x4EE4;&#x6765;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x5B9E;&#x9645;&#x8BC1;&#x4E66;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x6D89;&#x53CA;&#x7684;&#x5E76;&#x4E0D;&#x591A;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x6211;&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x6B65;&#x9AA4;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF0C;&#x4E00;&#x662F;&#x8BA9;&#x81EA;&#x5DF1;&#x8BB0;&#x4F4F;&#xFF0C;&#x5176;&#x6B21;&#x5E0C;&#x671B;&#x53EF;&#x4EE5;&#x7ED9;&#x5927;&#x5BB6;&#x5728;&#x5B9E;&#x9645;&#x8FC7;&#x7A0B;&#x4E2D;&#x6709;&#x4E00;&#x4E9B;&#x542F;&#x53D1;&#x3002;</p>
+<h1 id="&#x7533;&#x8BF7;-ssl-&#x8BC1;&#x4E66;">&#x7533;&#x8BF7; SSL &#x8BC1;&#x4E66;</h1>
+<h2 id="&#x524D;&#x63D0;">&#x524D;&#x63D0;</h2>
+<ul>
+<li>&#x6211;&#x7533;&#x8BF7;&#x7684;&#x662F;&#x963F;&#x91CC;&#x4E91;&#x7684; SSL &#x8BC1;&#x4E66;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x8981;&#x7533;&#x8BF7; SSL &#x8BC1;&#x4E66;&#xFF0C;&#x9700;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x5907;&#x6848;&#x8FC7;&#x7684;&#x57DF;&#x540D;</li>
+</ul>
+<h1 id="&#x5728;-spring-boot-&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;-https">&#x5728; Spring Boot &#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528; https</h1>
+<h2 id="&#x524D;&#x63D0;">&#x524D;&#x63D0;</h2>
+<ul>
+<li>&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A; Spring Boot &#x9879;&#x76EE;</li>
+<li>&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x4E0A;&#x4E00;&#x6B65;</li>
+</ul>
+<h2 id="&#x6B65;&#x9AA4;">&#x6B65;&#x9AA4;</h2>
+<ul>
+<li>&#x5728;&#x963F;&#x91CC;&#x4E91;&#x4E2D;&#x7684;&#x8BC1;&#x4E66;&#x5217;&#x8868;&#xFF0C;&#x4E0B;&#x8F7D;&#x9881;&#x53D1;&#x7ED9;&#x4F60;&#x7684;&#x8BC1;&#x4E66;</li>
+<li>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; p12 &#x548C; jks &#x4E24;&#x79CD;&#x683C;&#x5F0F;&#x7684;&#x8BC1;&#x4E66;&#x6765;&#x5B9E;&#x73B0;&#x4F7F;&#x7528; https &#x7684;&#x76EE;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x5206;&#x522B;&#x8FDB;&#x884C;&#x4ECB;&#x7ECD;</li>
+</ul>
+<h3 id="jks">jks</h3>
+<ul>
+<li><p>&#x628A;&#x521A;&#x521A;&#x4E0B;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x7684; Tomcat &#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;jks&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230; spring boot &#x9879;&#x76EE;&#x4E2D;&#x7684; src/main/resources/ &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x548C; application.properties &#x5E73;&#x7EA7;</p>
+</li>
+<li><p>&#x5E76;&#x4E14;&#x5728; application.properties &#x4E2D;&#x914D;&#x7F6E;&#x5982;&#x4E0B;&#x547D;&#x4EE4;</p>
+<pre><code class="lang-undefined">server.port: 8092
+server.ssl.key-store= classpath:server.jks
+server.ssl.key-store-password=&#x4F60;&#x7684;&#x5BC6;&#x7801;
+server.ssl.keyStoreType = JKS
+</code></pre>
+</li>
+<li><p>key-store: &#x751F;&#x6210;&#x7684;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;,&#x5176;&#x4E2D; server.jks &#x9700;&#x8981;&#x6539;&#x4E3A;&#x4F60;&#x521A;&#x521A;&#x590D;&#x5236;&#x8FDB;&#x6765;&#x7684;jks&#x6587;&#x4EF6;&#x540D;</p>
+</li>
+<li>key-store-password: &#x6307;&#x5B9A;&#x7B7E;&#x540D;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x6253;&#x5F00;&#x4E0B;&#x8F7D;&#x6587;&#x4EF6;&#x4E2D; Tomcat &#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684; txt &#x6587;&#x4EF6;&#xFF0C;&#x5373;&#x4E3A;&#x6B64;&#x5904;&#x586B;&#x5199;&#x7684;&#x5BC6;&#x7801;</li>
+<li>keyStoreType:&#x4E3A;&#x5236;&#x5B9A;&#x79D8;&#x94A5;&#x4ED3;&#x5E93;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x586B;&#x5199;&#x4E3A; JKS</li>
+</ul>
+<h3 id="p12">p12</h3>
+<ul>
+<li><p>&#x6253;&#x5F00;&#x4F60;&#x7684;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x7AEF;&#xFF0C;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x5E76;&#x4E14;&#x628A;&#x521A;&#x521A;&#x4E0B;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x7684; Nginx &#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684; crt &#x6587;&#x4EF6;&#x548C; key &#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x6B64;&#x6587;&#x4EF6;&#x5939;&#x4E2D;</p>
+</li>
+<li><p>&#x8F93;&#x51FA;&#x547D;&#x4EE4;</p>
+<pre><code class="lang-css"><span class="hljs-selector-tag">openssl</span> <span class="hljs-selector-tag">pkcs12</span> <span class="hljs-selector-tag">-export</span> <span class="hljs-selector-tag">-clcerts</span> <span class="hljs-selector-tag">-in</span> <span class="hljs-selector-tag">yourDomain</span><span class="hljs-selector-class">.crt</span> <span class="hljs-selector-tag">-inkey</span> <span class="hljs-selector-tag">myPrivateKey</span><span class="hljs-selector-class">.key</span> <span class="hljs-selector-tag">-out</span> <span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.p12</span>
+</code></pre>
+</li>
+<li><p>yourDomain.crt &#x66FF;&#x6362;&#x4E3A;&#x4F60;&#x7684; crt &#x6587;&#x4EF6;</p>
+</li>
+<li>myPrivateKey.key &#x66FF;&#x6362;&#x4E3A;&#x4F60;&#x7684; key &#x6587;&#x4EF6;</li>
+<li>&#x5728;&#x6B64;&#x8FC7;&#x7A0B;&#x4E2D;&#x9700;&#x8981;&#x8BA9;&#x4F60;&#x8F93;&#x5165;&#x5BC6;&#x7801;&#xFF0C;&#x8BB0;&#x4F4F;&#x8FD9;&#x4E2A;&#x5BC6;&#x7801;&#xFF0C;&#x540E;&#x9762;&#x4F1A;&#x7528;&#x5230;</li>
+<li>&#x6267;&#x884C;&#x6B64;&#x547D;&#x4EE4;&#xFF0C;&#x751F;&#x6210;&#x4E86;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684; p12 &#x6587;&#x4EF6;&#xFF0C;&#x5C06;&#x5176;&#x590D;&#x5236;&#x5230; spring boot &#x9879;&#x76EE;&#x4E2D;&#x7684; src/main/resources/ &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x548C; application.properties &#x5E73;&#x7EA7;</li>
+<li>&#x5E76;&#x4E14;&#x5728; application.properties &#x4E2D;&#x914D;&#x7F6E;&#x5982;&#x4E0B;&#x547D;&#x4EE4;</li>
+</ul>
+<pre><code class="lang-css"><span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.port</span>: 8092
+<span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.ssl</span><span class="hljs-selector-class">.key-store</span>: <span class="hljs-selector-tag">classpath</span><span class="hljs-selector-pseudo">:server.p12</span>
+<span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.ssl</span><span class="hljs-selector-class">.key-store-password</span>: &#x521A;&#x521A;&#x8BBE;&#x7F6E;&#x7684;&#x5BC6;&#x7801;
+<span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.ssl</span><span class="hljs-selector-class">.keyStoreType</span>: <span class="hljs-selector-tag">PKCS12</span>
+<span class="hljs-selector-tag">server</span><span class="hljs-selector-class">.ssl</span><span class="hljs-selector-class">.keyAlias</span>:
+</code></pre>
+<ol>
+<li>key-store: &#x751F;&#x6210;&#x7684;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x50A8;&#x8DEF;&#x5F84;,&#x5176;&#x4E2D; server.p12 &#x9700;&#x8981;&#x6539;&#x4E3A;&#x4F60;&#x751F;&#x6210;&#x7684; p12 &#x6587;&#x4EF6;&#x7684;&#x540D;&#x5B57;</li>
+<li>key-store-password: &#x6307;&#x5B9A;&#x7B7E;&#x540D;&#x7684;&#x5BC6;&#x7801;&#xFF0C;&#x8981;&#x8BBE;&#x7F6E;&#x6210;&#x521A;&#x521A;&#x4F60;&#x8BBE;&#x7F6E;&#x7684;&#x5BC6;&#x7801;</li>
+<li>keyStoreType:&#x4E3A;&#x5236;&#x5B9A;&#x79D8;&#x94A5;&#x4ED3;&#x5E93;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x586B;&#x5199;&#x4E3A; PKCS12</li>
+<li>keyAlias: &#x4E3A;&#x522B;&#x540D;</li>
+</ol>
+<p>&#x6CE8;&#xFF1A;&#x5982;&#x679C;&#x4E0D;&#x77E5;&#x9053;&#x522B;&#x540D;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x8F93;&#x5165;</p>
+<pre><code class="lang-cpp">keytool -<span class="hljs-built_in">list</span> -keystore server.p12
+</code></pre>
+<h3 id="&#x6269;&#x5C55;&#xFF1A;&#x540C;&#x65F6;&#x53EA;&#x7528;-http-&#x5E76;&#x5C06;-http-&#x81EA;&#x52A8;&#x8F6C;&#x5411;-https">&#x6269;&#x5C55;&#xFF1A;&#x540C;&#x65F6;&#x53EA;&#x7528; http &#x5E76;&#x5C06; http &#x81EA;&#x52A8;&#x8F6C;&#x5411; https</h3>
+<p>&#x5728;&#x5165;&#x53E3;&#x7C7B;&#x4E2D;&#x6DFB;&#x52A0;&#x76F8;&#x5E94;&#x7684;&#x8F6C;&#x5411;Bean&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> EmbeddedServletContainerFactory <span class="hljs-title">servletContainer</span><span class="hljs-params">()</span> </span>{
+        TomcatEmbeddedServletContainerFactory tomcat = <span class="hljs-keyword">new</span> TomcatEmbeddedServletContainerFactory() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postProcessContext</span><span class="hljs-params">(Context context)</span> </span>{
+                SecurityConstraint constraint = <span class="hljs-keyword">new</span> SecurityConstraint();
+                constraint.setUserConstraint(<span class="hljs-string">&quot;CONFIDENTIAL&quot;</span>);
+                SecurityCollection collection = <span class="hljs-keyword">new</span> SecurityCollection();
+                collection.addPattern(<span class="hljs-string">&quot;/*&quot;</span>);
+                constraint.addCollection(collection);
+                context.addConstraint(constraint);
+            }
+        };
+        tomcat.addAdditionalTomcatConnectors(httpConnector());
+        <span class="hljs-keyword">return</span> tomcat;
+    }
+
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Connector <span class="hljs-title">httpConnector</span><span class="hljs-params">()</span> </span>{
+        Connector connector = <span class="hljs-keyword">new</span> Connector(<span class="hljs-string">&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</span>);
+        connector.setScheme(<span class="hljs-string">&quot;http&quot;</span>);
+        <span class="hljs-comment">//Connector&#x76D1;&#x542C;&#x7684;http&#x7684;&#x7AEF;&#x53E3;&#x53F7;</span>
+        connector.setPort(<span class="hljs-number">8080</span>);
+        connector.setSecure(<span class="hljs-keyword">false</span>);
+        <span class="hljs-comment">//&#x76D1;&#x542C;&#x5230;http&#x7684;&#x7AEF;&#x53E3;&#x53F7;&#x540E;&#x8F6C;&#x5411;&#x5230;&#x7684;https&#x7684;&#x7AEF;&#x53E3;&#x53F7;</span>
+        connector.setRedirectPort(<span class="hljs-number">8092</span>);
+        <span class="hljs-keyword">return</span> connector;
+    }
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x6BB5;&#x914D;&#x7F6E;&#xFF0C;&#x8BBF;&#x95EE;<code>http://localhost:8080</code>&#x7684;&#x65F6;&#x5019;&#x7CFB;&#x7EDF;&#x4F1A;&#x81EA;&#x52A8;&#x91CD;&#x5B9A;&#x5411;&#x5230;<code>https://localhost:8092</code>&#x8FD9;&#x4E2A;&#x5730;&#x5740;&#x4E0A;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="解决GitHub网速慢的问题.html" class="navigation navigation-prev " aria-label="Previous page: 第4节：解决GitHub网速慢的问题">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../Chapter2/" class="navigation navigation-next " aria-label="Next page: 第二章">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第5节：在Spring Boot中配置ssl证书实现https","level":"1.2.5","depth":2,"next":{"title":"第二章","level":"1.3","depth":1,"path":"Chapter2/README.md","ref":"Chapter2/README.md","articles":[{"title":"第1节：安装Python","level":"1.3.1","depth":2,"path":"Chapter2/安装Python.md","ref":"Chapter2/安装Python.md","articles":[]},{"title":"第2节：安装MySQL5.7","level":"1.3.2","depth":2,"path":"Chapter2/安装MySQL5.7.md","ref":"Chapter2/安装MySQL5.7.md","articles":[]}]},"previous":{"title":"第4节：解决GitHub网速慢的问题","level":"1.2.4","depth":2,"path":"Chapter1/解决GitHub网速慢的问题.md","ref":"Chapter1/解决GitHub网速慢的问题.md","articles":[]},"dir":"ltr"},"config":{"plugins":["icp"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"icp":{"link":"https://beian.miit.gov.cn/","style":{},"number":"京ICP备2021038404号"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"学习资料","gitbook":"*"},"file":{"path":"Chapter1/在Spring Boot中配置ssl证书实现https.md","mtime":"2020-07-09T06:47:25.572Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-09T02:54:56.927Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
